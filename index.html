@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ResuBuild — Premium Dynamic Workspace</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="app-navbar">
+    <div class="navbar__brand">
+      <div class="brand-logo">R</div>
+      <span class="brand-name">ResuBuild</span>
+      <span class="brand-badge">Premium 👑</span>
+    </div>
+    
+    <div class="navbar__actions">
+      <button class="resume__download" id="downloadPdf">
+        <span>Export PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="resume">
+
+    <section class="resume__form">
+      
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Personal Details</h3>
+        <div class="input-grid">
+          <input class="resume__input" id="name" placeholder="Full Name" autocomplete="off" />
+          <input class="resume__input" id="title" placeholder="Professional Title (e.g., UI Developer)" autocomplete="off" />
+          <input class="resume__input" id="email" placeholder="Email Address" autocomplete="off" />
+          <input class="resume__input" id="phone" placeholder="Phone Number" autocomplete="off" />
+          <input class="resume__input" id="location" placeholder="City, State" autocomplete="off" />
+          <input class="resume__input" id="portfolio" placeholder="Portfolio URL" autocomplete="off" />
+        </div>
+        <input class="resume__input" id="linkedin" placeholder="LinkedIn URL" autocomplete="off" style="margin-top: 14px;" />
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Professional Summary</h3>
+        <textarea class="resume__textarea" id="summary" placeholder="Briefly describe your core technical expertise and milestones..."></textarea>
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Technical Expertise</h3>
+        <input class="resume__input" id="skills" placeholder="JavaScript, TypeScript, React, Next.js, Redux, HTML5, CSS3" autocomplete="off" />
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Languages</h3>
+        <input class="resume__input" id="languages" placeholder="English (Fluent), Hindi (Native)" autocomplete="off" />
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Work History</h3>
+        <div id="experienceContainer"></div>
+        <button class="resume__btn-secondary neon-border-cyan" id="addExp">+ Add Work History</button>
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Key Projects</h3>
+        <div id="projectContainer"></div>
+        <button class="resume__btn-secondary neon-border-pink" id="addProject">+ Add Project Entry</button>
+      </div>
+
+      <div class="form-section-card reveal-card">
+        <h3 class="resume__title">Education</h3>
+        <div id="educationContainer"></div>
+        <button class="resume__btn-secondary neon-border-cyan" id="addEdu">+ Add Academic Record</button>
+      </div>
+
+    </section>
+
+    <section class="resume__preview">
+      <div class="preview-scroll-container">
+        <div class="resume__card" id="preview">
+          </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script/app.js"></script>
+</body>
+</html>
