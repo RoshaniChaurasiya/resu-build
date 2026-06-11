@@ -35,7 +35,6 @@ function render() {
 
     ${resume.summary ? `<div class="preview-section-title">Professional Summary</div><p class="preview-summary">${resume.summary}</p>` : ""}
     ${resume.skills.length && resume.skills[0] !== "" ? `<div class="preview-section-title">Technical Skills</div><p class="skills-text-line"><strong>Skills:</strong> ${resume.skills.join(", ")}</p>` : ""}
-    ${resume.languages.length && resume.languages[0] !== "" ? `<div class="preview-section-title">Languages</div><p class="skills-text-line"><strong>Languages:</strong> ${resume.languages.join(", ")}</p>` : ""}
 
     ${resume.experience.length ? `
       <div class="preview-section-title">Professional Experience</div>
@@ -98,6 +97,7 @@ function render() {
         </div>
       `).join("")}
     ` : ""}
+    ${resume.languages.length && resume.languages[0] !== "" ? `<div class="preview-section-title">Languages</div><p class="skills-text-line"><strong>Languages:</strong> ${resume.languages.join(", ")}</p>` : ""}
   `;
 }
 
