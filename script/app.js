@@ -239,3 +239,56 @@ document.getElementById("downloadPdf").addEventListener("click", () => {
 
 // INITIAL HYDRATION RUN
 render();
+
+
+// ==========================================================================
+// SECRET CREATOR AD INTERCEPTOR CORE ENGINE
+// ==========================================================================
+const creatorAdminPanel = document.getElementById("creatorAdminPanel");
+const closeAdminPanel = document.getElementById("closeAdminPanel");
+
+// Secret Keyboard Trigger Shortcut: Press Ctrl + Shift + A together to open
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") {
+    e.preventDefault(); // Prevents standard browser side-actions
+    creatorAdminPanel.classList.toggle("is-visible");
+  }
+});
+
+// Close panel via the "X" button click
+closeAdminPanel.addEventListener("click", () => {
+  creatorAdminPanel.classList.remove("is-visible");
+});
+
+// Developer Utility Action 1: Wipe session data instantly
+document.getElementById("adminWipeStorage").addEventListener("click", () => {
+  if (confirm("Are you sure you want to clear all Local Storage data? This will reset the application workspace completely.")) {
+    localStorage.removeItem("resubuild-user-data");
+    window.location.reload(); // Refresh to clean slate
+  }
+});
+
+// Developer Utility Action 2: Instantly inject demo dummy fields for validation testing
+document.getElementById("adminLoadSample").addEventListener("click", () => {
+  const sampleProfileData = {
+    personal: {
+      name: "Roshani Chaurasiya",
+      title: "Frontend Developer",
+      email: "roshni.chaurasiya2111@gmail.com",
+      phone: "8881901986",
+      location: "Virar, Maharashtra",
+      portfolio: "roshani-portfolio.netlify.app/",
+      linkedin: "linkedin.com/in/roshani-chaurasiya-4318532a4"
+    },
+    summary: "Frontend Developer with 2.6 years of experience building scalable, high-performance web applications using React.js and Next.js. Delivered 3 production applications serving real users with expertise in state management.",
+    skills: ["JavaScript", "TypeScript", "React", "Next.js", "Redux", "REST API", "GenAI Integration", "HTML5", "CSS3", "SCSS", "Tailwind CSS"],
+    languages: ["English (Fluent)", "Hindi (Native)"],
+    experience: [],
+    education: [],
+    projects: []
+  };
+
+  // Merge sample array into data store engine and sync the workspace views
+  localStorage.setItem("resubuild-user-data", JSON.stringify(sampleProfileData));
+  window.location.reload(); // Quick refresh hydrates the inputs smoothly
+});

@@ -632,3 +632,128 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 }
+
+
+/* ==========================================================================
+   HIDDEN CREATOR ADMIN PANEL WORKSPACE STYLES
+   ========================================================================== */
+.creator-admin-panel {
+  position: fixed;
+  top: 0;
+  right: -340px; /* Completely hidden off-screen by default */
+  width: 320px;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  z-index: 9999; /* Forces it above all other elements on the site */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Toggled on via your secret keyboard listener shortcut */
+.creator-admin-panel.is-visible {
+  transform: translateX(-340px); /* Slides smoothly into view */
+}
+
+.admin-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+.admin-panel-header h4 {
+  margin: 0;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #60a5fa, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-close-btn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+}
+.admin-close-btn:hover { color: #f87171; }
+
+.admin-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-stat-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 14px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+}
+.text-glow-cyan { color: #22d3ee; text-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
+
+.stat-code {
+  font-family: monospace;
+  font-size: 12px;
+  color: #f472b6;
+}
+
+.admin-action-section h5 {
+  margin: 20px 0 10px 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.admin-action-btn {
+  width: 100%;
+  padding: 11px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.2s ease;
+}
+
+.admin-action-btn.btn-cyan {
+  background: rgba(34, 211, 238, 0.1);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+.admin-action-btn.btn-cyan:hover { background: #22d3ee; color: #05070c; }
+
+.admin-action-btn.btn-danger {
+  background: rgba(248, 113, 113, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.2);
+}
+.admin-action-btn.btn-danger:hover { background: #f87171; color: #ffffff; }

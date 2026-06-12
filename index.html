@@ -86,9 +86,31 @@
           </div>
       </div>
     </section>
-
   </main>
 
+  <div id="creatorAdminPanel" class="creator-admin-panel">
+    <div class="admin-panel-header">
+      <h4>🚀 ResuBuild Creator Hub</h4>
+      <button id="closeAdminPanel" class="admin-close-btn">✕</button>
+    </div>
+    <div class="admin-panel-content">
+      <div class="admin-stat-card">
+        <span class="stat-label">System Mode</span>
+        <span class="stat-value text-glow-cyan">Production Active</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="stat-label">Local Storage Key</span>
+        <code class="stat-code">resubuild-user-data</code>
+      </div>
+      
+      <div class="admin-action-section">
+        <h5>Developer Utilities</h5>
+        <button id="adminLoadSample" class="admin-action-btn btn-cyan">Load Demo Data</button>
+        <button id="adminWipeStorage" class="admin-action-btn btn-danger">Wipe Session Storage</button>
+      </div>
+    </div>
+  </div>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="script/app.js"></script>
 </body>
