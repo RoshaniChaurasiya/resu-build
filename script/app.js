@@ -242,53 +242,117 @@ render();
 
 
 // ==========================================================================
-// SECRET CREATOR AD INTERCEPTOR CORE ENGINE
+// SECURE CREATOR ADMIN HUB INTERCEPTOR (PASSWORD GATED)
 // ==========================================================================
-const creatorAdminPanel = document.getElementById("creatorAdminPanel");
-const closeAdminPanel = document.getElementById("closeAdminPanel");
 
-// Secret Keyboard Trigger Shortcut: Press Ctrl + Shift + A together to open
+// Simple string hash calculator to keep your plain text password hidden in source code
+function calculateSimpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0; // Convert to a 32bit integer
+  }
+  return hash;
+}
+
+/* The password token hash below corresponds to the text password: "admin"
+   If you want to change your password, type your new password into an online
+   string hash calculator (or use console.log(calculateSimpleHash("your_password")))
+   and replace the number below with your new hash integer.
+*/
+const SECRET_CREATOR_TOKEN_HASH = 92668751; 
+
+// Secret Global Keyboard Trigger Shortcut: Press Ctrl + Shift + A together
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "a") {
-    e.preventDefault(); // Prevents standard browser side-actions
-    creatorAdminPanel.classList.toggle("is-visible");
+    e.preventDefault();
+
+    // Check if the panel already exists in the DOM window
+    let existingPanel = document.getElementById("creatorAdminPanel");
+    
+    if (existingPanel) {
+      existingPanel.classList.toggle("is-visible");
+    } else {
+      // Prompt for your private password token
+      const userGateKey = prompt("Enter ResuBuild Creator Master Key:");
+      
+      if (userGateKey && calculateSimpleHash(userGateKey) === SECRET_CREATOR_TOKEN_HASH) {
+        injectAndOpenCreatorPanel();
+      } else if (userGateKey) {
+        alert("❌ Access Denied: Invalid Creator Token.");
+      }
+    }
   }
 });
 
-// Close panel via the "X" button click
-closeAdminPanel.addEventListener("click", () => {
-  creatorAdminPanel.classList.remove("is-visible");
-});
+// DYNAMICALIY GENERATE ADMIN DASHBOARD ONLY UPON VALID AUTHORIZATION
+function injectAndOpenCreatorPanel() {
+  const panelDiv = document.createElement("div");
+  panelDiv.id = "creatorAdminPanel";
+  panelDiv.className = "creator-admin-panel";
+  
+  panelDiv.innerHTML = `
+    <div class="admin-panel-header">
+      <h4>🚀 ResuBuild Creator Hub</h4>
+      <button id="closeAdminPanel" class="admin-close-btn">✕</button>
+    </div>
+    <div class="admin-panel-content">
+      <div class="admin-stat-card">
+        <span class="stat-label">System Mode</span>
+        <span class="stat-value text-glow-cyan">Production Active</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="stat-label">Local Storage Key</span>
+        <code class="stat-code">resubuild-user-data</code>
+      </div>
+      
+      <div class="admin-action-section">
+        <h5>Developer Utilities</h5>
+        <button id="adminLoadSample" class="admin-action-btn btn-cyan">Load Demo Data</button>
+        <button id="adminWipeStorage" class="admin-action-btn btn-danger">Wipe Session Storage</button>
+      </div>
+    </div>
+  `;
 
-// Developer Utility Action 1: Wipe session data instantly
-document.getElementById("adminWipeStorage").addEventListener("click", () => {
-  if (confirm("Are you sure you want to clear all Local Storage data? This will reset the application workspace completely.")) {
-    localStorage.removeItem("resubuild-user-data");
-    window.location.reload(); // Refresh to clean slate
-  }
-});
+  document.body.appendChild(panelDiv);
 
-// Developer Utility Action 2: Instantly inject demo dummy fields for validation testing
-document.getElementById("adminLoadSample").addEventListener("click", () => {
-  const sampleProfileData = {
-    personal: {
-      name: "Roshani Chaurasiya",
-      title: "Frontend Developer",
-      email: "roshni.chaurasiya2111@gmail.com",
-      phone: "8881901986",
-      location: "Virar, Maharashtra",
-      portfolio: "roshani-portfolio.netlify.app/",
-      linkedin: "linkedin.com/in/roshani-chaurasiya-4318532a4"
-    },
-    summary: "Frontend Developer with 2.6 years of experience building scalable, high-performance web applications using React.js and Next.js. Delivered 3 production applications serving real users with expertise in state management.",
-    skills: ["JavaScript", "TypeScript", "React", "Next.js", "Redux", "REST API", "GenAI Integration", "HTML5", "CSS3", "SCSS", "Tailwind CSS"],
-    languages: ["English (Fluent)", "Hindi (Native)"],
-    experience: [],
-    education: [],
-    projects: []
-  };
+  // Smoothly slide open using your existing transitions
+  setTimeout(() => {
+    panelDiv.classList.add("is-visible");
+  }, 10);
 
-  // Merge sample array into data store engine and sync the workspace views
-  localStorage.setItem("resubuild-user-data", JSON.stringify(sampleProfileData));
-  window.location.reload(); // Quick refresh hydrates the inputs smoothly
-});
+  // Attach button click listener interactions to the freshly generated nodes
+  panelDiv.querySelector("#closeAdminPanel").addEventListener("click", () => {
+    panelDiv.classList.remove("is-visible");
+  });
+
+  panelDiv.querySelector("#adminWipeStorage").addEventListener("click", () => {
+    if (confirm("Are you sure you want to clear all Local Storage data? This resets the active layout workspace.")) {
+      localStorage.removeItem("resubuild-user-data");
+      window.location.reload();
+    }
+  });
+
+  panelDiv.querySelector("#adminLoadSample").addEventListener("click", () => {
+    const sampleProfileData = {
+      personal: {
+        name: "Roshani Chaurasiya",
+        title: "Frontend Developer",
+        email: "roshni.chaurasiya2111@gmail.com",
+        phone: "8881901986",
+        location: "Virar, Maharashtra",
+        portfolio: "roshani-portfolio.netlify.app/",
+        linkedin: "linkedin.com/in/roshani-chaurasiya-4318532a4"
+      },
+      summary: "Frontend Developer with 2.6 years of experience specializing in React.js and Next.js, building scalable, high-performance web applications[cite: 6]. Proficient in state management, REST API integration, SSR/SSG optimization, and reusable component-based code[cite: 7].",
+      skills: ["JavaScript", "TypeScript", "React", "Next.js", "Redux", "REST API", "GenAI Integration", "HTML5", "CSS3", "SCSS", "Tailwind CSS"],
+      languages: ["English", "Hindi"],
+      experience: [],
+      education: [],
+      projects: []
+    };
+
+    localStorage.setItem("resubuild-user-data", JSON.stringify(sampleProfileData));
+    window.location.reload();
+  });
+}
